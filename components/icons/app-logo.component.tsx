@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { SVGProps } from 'react'
 
-export function WizartLogo(props: SVGProps<SVGSVGElement>) {
+export function AppLogo(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       width={props.width || 139}
