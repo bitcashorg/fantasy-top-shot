@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 
 import { Form, Text } from '~/components'
 import { TextInput } from '~/components/form/text-input'
+import { DollarIcon } from '~/components/icons'
 import { WizardStepProps } from '~/components/wizard'
 import { HomeWizardStepNav } from '~/views/home/home-wizard-header/home-header-nav.component'
 
@@ -17,14 +18,19 @@ export function BetStep({ next, prev }: WizardStepProps) {
         <div className="py-10"></div>
         <Form>
           <Text variant="display-1">Select Bet</Text>
-          <div className="flex flex-col gap-6">
-            <TextInput
-              id="amount"
-              placeholder="Amount"
-              formProps={{
-                ...register('amount', { required: true }),
-              }}
-            />
+          <div className="flex py-4">
+            <div className="w-12 h-12">
+              <DollarIcon />
+            </div>
+            <div className="flex flex-col gap-6">
+              <TextInput
+                id="amount"
+                placeholder="Amount"
+                formProps={{
+                  ...register('amount', { required: true }),
+                }}
+              />
+            </div>
           </div>
         </Form>
       </HomeWizardPageTransition>
