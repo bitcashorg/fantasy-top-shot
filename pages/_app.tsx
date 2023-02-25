@@ -6,13 +6,14 @@ import { useEffect } from 'react'
 import { AuthProvider } from '~/context/auth.context'
 import { GlobalContextProvider } from '~/context/global.context'
 import { RootLayout } from '~/layouts/root'
+import '~/public/assets/css/icons.min.css'
+
 /* * importing public css assets */
 import '~/public/assets/css/tailwind.css'
-import '~/public/assets/css/icons.min.css'
 import '~/styles/globals.css'
-import '~/styles/line.css'
 import '~/styles/home-wizard-header.css'
 import '~/styles/home-wizard-steps.css'
+import '~/styles/line.css'
 import '~/styles/wizart-chat.css'
 
 import '../config/flow/config'

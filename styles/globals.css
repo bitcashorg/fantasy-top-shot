@@ -61,7 +61,7 @@ select:focus {
 /** Global classes... Might be better at components.css... */
 
 .asset-image-wrapper {
-  @apply h-auto w-full overflow-hidden;
+  @apply w-full h-auto overflow-hidden;
 
   border-radius: 6px;
 }
@@ -123,5 +123,16 @@ select:focus {
   50%,
   100% {
     background-color: rgba(152, 128, 255, 0.2);
+  }
+}
+
+@layer base {
+  input[type='number'].appearance-none::-webkit-inner-spin-button,
+  input[type='number'].appearance-none::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'].appearance-none {
+    -moz-appearance: textfield;
   }
 }
