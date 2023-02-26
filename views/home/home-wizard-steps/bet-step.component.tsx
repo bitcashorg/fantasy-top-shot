@@ -13,7 +13,7 @@ import { HomeWizardPageTransition } from '../home-wizard/home-wizard-page-transi
 
 export function BetStep({ next, prev }: WizardStepProps) {
   const { handleSubmit, register } = useForm<BetFormProps>()
-  const onSubmit = (data: MintFormProps) => {
+  const onSubmit = (data: any) => {
     console.log({ data })
     next() // WIP: pending mint
   }
