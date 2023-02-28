@@ -6,18 +6,6 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'replicate.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'replicate.delivery',
-      },
-      {
-        protocol: 'https',
-        hostname: 'bestaiprompts.art',
-      },
-      {
-        protocol: 'https',
         hostname: 'i.imgur.com',
       },
     ],
