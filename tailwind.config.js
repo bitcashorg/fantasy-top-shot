@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
+  darkMode: 'class',
   content: [
     './layouts/**/*.{js,ts,jsx,tsx}',
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -8,6 +9,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
     './ui/**/*.{js,ts,jsx,tsx}',
     '/ui/_legacy/components/**/*.{js,ts,jsx,tsx}',
+    './node_modules/tailwindcss-dark-mode/prefers-dark.js',
   ],
   theme: {
     fontFamily: {
@@ -15,7 +17,7 @@ module.exports = {
     },
     extend: {
       screens: {
-        xs: '341px',
+        xs: '321px',
       },
       dropShadow: {
         'wz-purple': '0 0px 50px rgb(172 47 164 / 55%)',
@@ -38,5 +40,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'), require('tailwindcss-global-dark')],
 }

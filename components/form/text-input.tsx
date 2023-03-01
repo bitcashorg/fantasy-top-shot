@@ -8,7 +8,6 @@ interface TextInputProps {
   placeholder?: string
   defaultValue?: string
   transparent?: boolean
-  inputType?: 'text' | 'password' | 'email' | 'number'
   error?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>>
 }
 
@@ -18,11 +17,10 @@ export const TextInput: React.FC<TextInputProps> = ({
   defaultValue,
   formProps,
   transparent,
-  inputType,
 }) => (
   <FormField>
     <Input
-      type={inputType || 'text'}
+      type="text"
       id={`form_${id}_input`}
       placeholder={placeholder}
       defaultValue={defaultValue}

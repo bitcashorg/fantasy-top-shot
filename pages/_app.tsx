@@ -1,5 +1,6 @@
+import { NextComponentType, NextPageContext } from 'next'
 import { SessionProvider, useSession } from 'next-auth/react'
-import type { AppProps } from 'next/app'
+import { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
 import { useEffect } from 'react'
 
@@ -18,14 +19,24 @@ import '~/styles/wizart-chat.css'
 
 import '../config/flow/config'
 
+export type ComponentWithAuth<P = {}> = NextComponentType<NextPageContext, any, P> & {
+  requireAuth?: boolean
+}
+
+type AppProps<P = {}> = NextAppProps<P> & {
+  Component: ComponentWithAuth
+}
+
 export default function MyApp({ Component, pageProps }: AppProps<any>) {
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <SessionProvider session={pageProps.session}>
-        <AuthProvider>
+      {/* Refetch session every hour since niftory tokens expire after 1 hour */}
+      <SessionProvider session={pageProps.session} refetchInterval={60 * 60}>
+        <SessionSync />
+        <AuthProvider requireAuth={Component.requireAuth}>
           <GlobalContextProvider>
             <RootLayout>
               <Component {...pageProps} />
@@ -35,4 +46,15 @@ export default function MyApp({ Component, pageProps }: AppProps<any>) {
       </SessionProvider>
     </>
   )
+}
+
+function SessionSync() {
+  const session = useSession()
+  // keep jwt in sync with next session
+  useEffect(() => {
+    if (session?.data?.user?.jwt)
+      localStorage.setItem(clientEnv.jwtLocalStorageKey, session.data?.user?.jwt || '')
+  }, [session])
+
+  return <></>
 }

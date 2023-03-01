@@ -207,6 +207,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@faker-js/faker@^7.6.0":
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-7.6.0.tgz#9ea331766084288634a9247fcd8b84f16ff4ba07"
+  integrity sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==
+
 "@genql/cli@^3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@genql/cli/-/cli-3.0.3.tgz#5873e6cbf5c63b814bd719a7a17055f416f3cba7"
@@ -3092,6 +3097,11 @@ next-auth@^4.19.2:
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
 
+next-themes@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.2.1.tgz#0c9f128e847979daf6c67f70b38e6b6567856e45"
+  integrity sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==
+
 next@13.2.0:
   version "13.2.0"
   resolved "https://registry.yarnpkg.com/next/-/next-13.2.0.tgz#100b2d1dca120a3460c767ccdad80fc8e2463e31"
@@ -4084,6 +4094,11 @@ tailwind-merge@^1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.10.0.tgz#535541c7373d8a31afa81a4267e2ab9b4afa9429"
   integrity sha512-WFnDXSS4kFTZwjKg5/oZSGzBRU/l+qcbv5NVTzLUQvJ9yovDAP05h0F2+ZFW0Lw9EcgRoc2AfURUdZvnEFrXKg==
+
+tailwindcss-global-dark@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/tailwindcss-global-dark/-/tailwindcss-global-dark-1.0.1.tgz#5071319f7e1a67bfb697a24329027f46208da93e"
+  integrity sha512-AeldGktCAOjdVnZI5Fm1anf/TQzzN03ER1UcRVfnfjDstMV32OJjR6MGB+CEkwavSzPBDWtgBCP/d8xO+fsGJQ==
 
 tailwindcss@^3.2.7:
   version "3.2.7"
