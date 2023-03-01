@@ -22,10 +22,10 @@ export function PlayStep({ next, prev }: WizardStepProps) {
       <HomeWizardPageTransition>
         <Form>
           <div className="flex justify-center"></div>
-          <div className="flex flex-col justify-center pt-5">
+          <div className="flex flex-col justify-center px-[10%]">
             <div className="flex justify-center">
               <video
-                className="relative object-cover h-full"
+                className="relative object-cover"
                 loop={true}
                 playsInline
                 preload="auto"
@@ -39,9 +39,6 @@ export function PlayStep({ next, prev }: WizardStepProps) {
                 <p>Your browser doesn’t support mp4 or webm html5 videos.</p>
               </video>
             </div>
-          </div>
-          <div className="pt-8">
-            <Button onClick={handleSubmit(onSubmit)} variant="primary" size="full" label="Next" />
           </div>
         </Form>
       </HomeWizardPageTransition>
