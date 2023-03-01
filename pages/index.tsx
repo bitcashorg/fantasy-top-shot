@@ -1,10 +1,10 @@
 import React from 'react'
-import { getTopShotClientGraphQLSdk } from '~/graphql/top-shot'
-import type * as TopShot from '~/graphql/top-shot/generated/schema'
 
+import { getTopShotClientGraphQLSdk } from '~/graphql/top-shot'
+import { everything } from '~/graphql/top-shot/generated/'
+import type * as TopShot from '~/graphql/top-shot/generated/schema'
+import { cards } from '~/lib/utils'
 import { HomeWizard } from '~/views/home/home-wizard'
-import { everything } from '~/graphql/top-shot/generated/';
-import { cards } from '~/lib/utils';
 
 export default function Home() {
   const [open, setOpen] = React.useState(true)
@@ -57,32 +57,35 @@ export default function Home() {
     setBackToTop(false)
   }
 
-
   return (
     <>
-      <span className="fixed blur-[200px] w-[600px] h-[600px] rounded-full top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 bg-gradient-to-tl from-red-600/20 to-violet-600/20 dark:from-red-600/40 dark:to-violet-600/40"></span>
+      <span className="fixed blur-[200px] p-20 max-w-[600px] max-h-[600px] rounded-full top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 bg-gradient-to-tl from-red-600/20 to-violet-600/20 dark:from-red-600/40 dark:to-violet-600/40"></span>
 
       {open && <HomeWizard />}
 
       {/* TODO: WIP... */}
       <video autoPlay width={200} height={200}>
-      {Object.keys(cards).map((key) => {
-        return (
-          <div key={key}>
-            <h1>{key}</h1>
-            <div className="grid grid-cols-2 gap-4">
-              {cards[key as keyof typeof cards].map((card, index) => {
-                return (
-                  <div key={index}>
-                    <video src={`https://assets.nbatopshot.com/editions${card.video}`} width={200} height={200} />
-                    <p>{card.player}</p>
-                  </div>
-                )
-              })}
+        {Object.keys(cards).map((key) => {
+          return (
+            <div key={key}>
+              <h1>{key}</h1>
+              <div className="grid grid-cols-2 gap-4">
+                {cards[key as keyof typeof cards].map((card, index) => {
+                  return (
+                    <div key={index}>
+                      <video
+                        src={`https://assets.nbatopshot.com/editions${card.video}`}
+                        width={200}
+                        height={200}
+                      />
+                      <p>{card.player}</p>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
       </video>
 
       <a

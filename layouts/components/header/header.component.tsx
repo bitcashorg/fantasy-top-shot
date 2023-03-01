@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AppLogo } from '~/components/icons'
+import { AppLogo } from '~/icons'
 
 import { Auth } from './auth.component'
 

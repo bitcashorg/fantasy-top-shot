@@ -1,13 +1,11 @@
-import clsx from 'clsx'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Form, Text } from '~/components'
 import { Button } from '~/components/button'
 import { TextInput } from '~/components/form/text-input'
-import { DollarIcon } from '~/components/icons'
 import { WizardStepProps } from '~/components/wizard'
-import { HomeWizardStepNav } from '~/views/home/home-wizard-header/home-header-nav.component'
+import { BitEuro } from '~/icons/bit-euro.icon'
 
 import { HomeWizardPageTransition } from '../home-wizard/home-wizard-page-transition.component'
 
@@ -27,7 +25,7 @@ export function BetStep({ next, prev }: WizardStepProps) {
           </div>
           <div className="flex justify-center pt-5">
             <div className="w-12 h-12">
-              <DollarIcon />
+              <BitEuro />
             </div>
             <div className="flex flex-col gap-6">
               <TextInput
@@ -61,7 +59,7 @@ export function BetStep({ next, prev }: WizardStepProps) {
               </video>
             </div>
           </div>
-          <div className="pt-8">
+          <div className="p-20 ">
             <Button onClick={handleSubmit(onSubmit)} variant="primary" size="full" label="Next" />
           </div>
         </Form>

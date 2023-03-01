@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { BackIcon } from '~/components/icons'
+import { BackIcon } from '~/icons'
 
 import { HomeWizardStepHeaderProps } from './home-header.type'
 
