@@ -14,8 +14,6 @@ export function Settings({}: SettingsProps) {
   const { showSettings } = useGlobalContext()
   const { theme, setTheme } = useTheme()
 
-  console.log({ flowUser })
-
   return showSettings ? (
     <div className="fixed z-[1000] bg-white dark:bg-slate-900 top-[74px] w-full h-full flex py-10 px-6 justify-end items-start">
       <div className="flex flex-col gap-6 w-full max-w-[600px] items-end">
