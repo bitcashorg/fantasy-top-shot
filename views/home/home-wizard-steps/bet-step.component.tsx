@@ -65,7 +65,7 @@ export function BetStep({ next, prev }: WizardStepProps) {
           <div className="flex justify-center w-full p-10">
             <div className="flex items-center justify-center h-12 align-middle bg-orange-400 rounded-lg w-60">
               <label>
-                <input className="mr-2 appearance-none" type="checkbox" />{' '}
+                <input className="mr-2 appearance-none" type="checkbox" />
                 <Text variant="info-2x"> Donate to Charity</Text>
               </label>
             </div>
