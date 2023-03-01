@@ -2,9 +2,10 @@ import { useMemo, useState } from 'react'
 
 import * as fcl from '@onflow/fcl'
 
+import { clientEnv } from '~/config/client'
+
 export function useFlowUser() {
   const [flowUser, setFlowUser] = useState<fcl.CurrentUserObject>()
-
   useMemo(() => {
     fcl
       .config()
