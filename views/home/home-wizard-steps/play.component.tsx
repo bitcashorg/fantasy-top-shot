@@ -40,6 +40,9 @@ export function PlayStep({ next, prev }: WizardStepProps) {
               </video>
             </div>
           </div>
+          <div className="p-20 ">
+            <Button onClick={handleSubmit(onSubmit)} variant="primary" size="full" label="Next" />
+          </div>
         </Form>
       </HomeWizardPageTransition>
     </div>

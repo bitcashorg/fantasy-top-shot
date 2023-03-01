@@ -18,11 +18,12 @@ export function BetStep({ next, prev }: WizardStepProps) {
   return (
     <div className="wizard-step-wrapper">
       <HomeWizardPageTransition>
-        <div className="py-10"></div>
+        <div className="py-5"></div>
         <Form>
           <div className="flex justify-center">
             <Text variant="display-1">Select Bet</Text>
           </div>
+
           <div className="flex justify-center pt-5">
             <div className="w-12 h-12">
               <BitEuro />
@@ -38,13 +39,14 @@ export function BetStep({ next, prev }: WizardStepProps) {
               />
             </div>
           </div>
+
           <div className="flex flex-col justify-center pt-5">
-            <div className="py-10 text-center">
+            <div className="pb-8 text-center">
               <Text variant="display-1">Or Select NFT</Text>
             </div>
             <div className="flex justify-center">
               <video
-                className="relative w-[150px] h-[150px] object-cover"
+                className="relative w-[250px] h-[250px] object-cover"
                 loop={true}
                 playsInline
                 preload="auto"
@@ -59,7 +61,14 @@ export function BetStep({ next, prev }: WizardStepProps) {
               </video>
             </div>
           </div>
-          <div className="p-20 ">
+
+          <div className="flex justify-center p-10 align-middle">
+            <label>
+              <input type="checkbox" className="mr-2" /> Donate to Charity
+            </label>
+          </div>
+
+          <div className="pl-20 pr-20 ">
             <Button onClick={handleSubmit(onSubmit)} variant="primary" size="full" label="Next" />
           </div>
         </Form>
