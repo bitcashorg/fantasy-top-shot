@@ -1,9 +1,10 @@
-import React from 'react'
-import { useCallback, useEffect, useState } from 'react'
+import { signIn as nextAuthSignIn, signOut as nextAuthSignOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import * as fcl from '@onflow/fcl'
 
-import { useTransaction } from './transaction.context'
+import { useFlowUser } from '~/hooks/use-flow-user'
 
 export type User = { loggedIn: false; addr: string | undefined }
 
@@ -17,159 +18,70 @@ type Profile = {
 export type UserProfile = Profile | null
 
 export type AuthContextType = {
-  currentUser: User
-  userProfile: UserProfile
-  profileExists: boolean
-  logOut: () => void
-  logIn: () => void
-  signUp: () => void
-  loadProfile: () => Promise<UserProfile>
-  createProfile: () => void
-  updateProfile: (profile: Profile) => void
+  signOut: () => void
+  signIn: () => void
 }
 
-const defaultUser: User = { loggedIn: false, addr: undefined }
+// TODO: keep for later
+// const defaultUser: User = { loggedIn: false, addr: undefined }
 export const defaultProfile: Profile = { name: '', color: '', info: '' }
 
 const defaultAuthContext: AuthContextType = {
-  currentUser: defaultUser,
-  userProfile: null,
-  profileExists: false,
-  logOut: () => {},
-  logIn: () => {
-    console.log('default login')
-  },
-  signUp: () => {},
-  loadProfile: async () => null,
-  createProfile: () => {},
-  updateProfile: (profile: Profile) => {},
+  signOut: () => {},
+  signIn: () => {},
 }
 
-function AuthProvider({ children }: { children: React.ReactNode }): JSX.Element {
-  const { initTransactionState, setTxId, setTransactionStatus } = useTransaction()
-  const [currentUser, setUser] = useState<User>(defaultUser)
-  const [userProfile, setProfile] = useState<UserProfile>(null)
-  const [profileExists, setProfileExists] = useState<boolean>(false)
+type AuthComponentProps = {
+  children: React.ReactNode
+  requireAuth: boolean | undefined
+}
 
-  useEffect(() => fcl.currentUser.subscribe(setUser), [])
+// TODO: WIP global auth state
+// Please complete this function
+function AuthProvider({ children, requireAuth }: AuthComponentProps): JSX.Element {
+  useFlowUser()
+  const router = useRouter()
 
-  const loadProfile = useCallback(async () => {
-    const profile = await fcl.query({
-      cadence: `
-        import Profile from 0xProfile
-        pub fun main(address: Address): Profile.ReadOnly? {
-          return Profile.read(address)
-        }
-      `,
-      args: (arg: any, t: any) => [arg(currentUser.addr, t.Address)],
-    })
-    setProfile(profile ?? null)
-    setProfileExists(profile !== null)
-    return profile
-  }, [currentUser, setProfile, setProfileExists])
+  const { data: session, status } = useSession()
+  const sessionLoading = status === 'loading'
+
+  const [isAuthenticating, setIsAuthenticating] = useState(false)
+  const isLoading = sessionLoading || isAuthenticating
+
+  const signIn = useCallback(async () => {
+    setIsAuthenticating(true)
+    await nextAuthSignIn('niftory')
+    setIsAuthenticating(false)
+  }, [])
+
+  const signOut = useCallback(async () => {
+    setIsAuthenticating(true)
+    fcl.unauthenticate()
+    const { url } = await nextAuthSignOut({ redirect: false })
+    await router.push(url)
+    setIsAuthenticating(false)
+  }, [router])
 
   useEffect(() => {
-    // Upon login check if a userProfile exists
-    if (currentUser.loggedIn && userProfile === null) {
-      loadProfile()
+    if (!requireAuth || isLoading) {
+      return
     }
-  }, [currentUser, userProfile, loadProfile])
 
-  const logOut = async () => {
-    await fcl.unauthenticate()
-    setUser({ addr: undefined, loggedIn: false })
-    setProfile(null)
-    setProfileExists(false)
-  }
+    if (session?.user.error) {
+      console.error(session?.user.error)
+      signOut()
+      return
+    }
 
-  const logIn = () => {
-    console.log('logIn')
-    fcl.logIn()
-  }
-
-  const signUp = () => {
-    console.log('signUp')
-    fcl.signUp()
-  }
-
-  const createProfile = async () => {
-    initTransactionState()
-
-    const transactionId = await fcl.mutate({
-      cadence: `
-        import Profile from 0xProfile
-        transaction {
-          prepare(account: AuthAccount) {
-            // Only initialize the account if it hasn't already been initialized
-            if (!Profile.check(account.address)) {
-              // This creates and stores the profile in the user's account
-              account.save(<- Profile.new(), to: Profile.privatePath)
-              // This creates the public capability that lets applications read the profile's info
-              account.link<&Profile.Base{Profile.Public}>(Profile.publicPath, target: Profile.privatePath)
-            }
-          }
-        }
-      `,
-      payer: fcl.authz,
-      proposer: fcl.authz,
-      authorizations: [fcl.authz],
-      limit: 50,
-    })
-    setTxId(transactionId)
-    fcl.tx(transactionId).subscribe((res: any) => {
-      setTransactionStatus(res.status)
-      if (res.status === 4) {
-        loadProfile()
-      }
-    })
-  }
-
-  const updateProfile = async ({ name, color, info }: Profile) => {
-    console.log('Updating profile', { name, color, info })
-    initTransactionState()
-
-    const transactionId = await fcl.mutate({
-      cadence: `
-        import Profile from 0xProfile
-        transaction(name: String, color: String, info: String) {
-          prepare(account: AuthAccount) {
-            account
-              .borrow<&Profile.Base{Profile.Owner}>(from: Profile.privatePath)!
-              .setName(name)
-            account
-              .borrow<&Profile.Base{Profile.Owner}>(from: Profile.privatePath)!
-              .setInfo(info)
-            account
-              .borrow<&Profile.Base{Profile.Owner}>(from: Profile.privatePath)!
-              .setColor(color)
-          }
-        }
-      `,
-      args: (arg: any, t: any) => [arg(name, t.String), arg(color, t.String), arg(info, t.String)],
-      payer: fcl.authz,
-      proposer: fcl.authz,
-      authorizations: [fcl.authz],
-      limit: 50,
-    })
-    setTxId(transactionId)
-    fcl.tx(transactionId).subscribe((res: any) => {
-      setTransactionStatus(res.status)
-      if (res.status === 4) {
-        loadProfile()
-      }
-    })
-  }
+    if (!session) {
+      router.push('/')
+      return
+    }
+  }, [requireAuth, session, router, isLoading, signOut])
 
   const providerValue = {
-    currentUser,
-    userProfile,
-    profileExists,
-    logOut,
-    logIn,
-    signUp,
-    loadProfile,
-    createProfile,
-    updateProfile,
+    signIn,
+    signOut,
   }
 
   return <AuthContext.Provider value={providerValue}>{children}</AuthContext.Provider>
