@@ -144,3 +144,24 @@ select:focus {
     @apply bg-white dark:bg-gray-800;
   }
 }
+
+.score-board {
+  @apply relative my-10 flex items-center justify-center rounded-xl border-2 bg-orange-400 bg-opacity-50 py-0;
+}
+
+.score-board picture {
+  @apply overflow-hidden rounded-b-xl;
+}
+
+.score-board > img {
+  @apply absolute h-[300px] object-contain;
+}
+
+.score-board__score {
+  @apply flex w-[50%] flex-col items-center justify-center gap-3 text-center text-4xl font-bold last-of-type:border-l-2;
+}
+
+.score-animation {
+  @apply absolute -top-6 h-14 w-14;
+}
+

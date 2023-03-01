@@ -63,31 +63,6 @@ export default function Home() {
 
       {open && <HomeWizard />}
 
-      {/* TODO: WIP... */}
-      <video autoPlay width={200} height={200}>
-        {Object.keys(cards).map((key) => {
-          return (
-            <div key={key}>
-              <h1>{key}</h1>
-              <div className="grid grid-cols-2 gap-4">
-                {cards[key as keyof typeof cards].map((card, index) => {
-                  return (
-                    <div key={index}>
-                      <video
-                        src={`https://assets.nbatopshot.com/editions${card.video}`}
-                        width={200}
-                        height={200}
-                      />
-                      <p>{card.player}</p>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          )
-        })}
-      </video>
-
       <a
         href="#"
         onClick={navigateToTop}
