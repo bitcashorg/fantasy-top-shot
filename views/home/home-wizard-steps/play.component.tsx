@@ -20,6 +20,7 @@ export function PlayStep({ next, prev }: WizardStepProps) {
   return (
     <div className="wizard-step-wrapper">
       <HomeWizardPageTransition>
+        <div className="py-5"></div>
         <Form>
           <div className="flex justify-center"></div>
           <div className="flex flex-col justify-center px-[10%]">

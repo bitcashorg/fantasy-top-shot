@@ -10,6 +10,7 @@ export function InspirationStep({ prev, next }: WizardStepProps) {
     <div className="wizard-step-wrapper">
       <HomeWizardStepNav label="Inspiration" prev={prev} step={3} />
       <HomeWizardPageTransition></HomeWizardPageTransition>
+      <div className="py-5"></div>
     </div>
   )
 }
