@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { AppLogo } from '~/icons/app-logo.component'
+import { WizartLogo } from '~/components/icons'
 
 import { ButtonSettings } from './button-settings.component'
 import { NiftoryAuth } from './niftory-auth.component'
@@ -33,7 +33,7 @@ export function Header() {
       <div className="flex items-center justify-between w-full mx-auto max-w-screen-2xl">
         <Link href="/" passHref>
           {/* TODO: ! WIZART LOGO IN LIGHT MODE */}
-          <AppLogo className="filter invert dark:invert-0" />
+          <WizartLogo className="filter invert dark:invert-0" />
         </Link>
 
         <div className="flex justify-end pt-1 gap-x-4 h-30">
