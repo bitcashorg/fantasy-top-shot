@@ -40,7 +40,7 @@ export function BetStep({ next, prev }: WizardStepProps) {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center pt-5">
+          {/* <div className="flex flex-col justify-center pt-5">
             <div className="pb-8 text-center">
               <Text variant="display-1">Or Select NFT</Text>
             </div>
@@ -60,12 +60,15 @@ export function BetStep({ next, prev }: WizardStepProps) {
                 <p>Your browser doesn’t support mp4 or webm html5 videos.</p>
               </video>
             </div>
-          </div>
+          </div> */}
 
-          <div className="flex justify-center p-10 align-middle">
-            <label>
-              <input type="checkbox" className="mr-2" /> Donate to Charity
-            </label>
+          <div className="flex justify-center w-full p-10">
+            <div className="flex items-center justify-center h-12 align-middle bg-orange-400 rounded-lg w-60">
+              <label>
+                <input className="mr-2 appearance-none" type="checkbox" />{' '}
+                <Text variant="info-2x"> Donate to Charity</Text>
+              </label>
+            </div>
           </div>
 
           <div className="pl-20 pr-20 ">

@@ -7,6 +7,7 @@ export const Text = w.button(t`font-bold `, {
     variant: {
       'display-1': t`text-2xl`,
       info: t`text-sm`,
+      'info-2x': t`text-md`,
       loading: t`text-2xl text-black`,
     },
   },
