@@ -4,6 +4,7 @@ import { AppProps as NextAppProps } from 'next/app'
 import Head from 'next/head'
 import { useEffect } from 'react'
 
+import { clientEnv } from '~/config/client'
 import { AuthProvider } from '~/context/auth.context'
 import { GlobalContextProvider } from '~/context/global.context'
 import { RootLayout } from '~/layouts/root'
